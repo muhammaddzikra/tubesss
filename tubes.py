@@ -72,5 +72,5 @@ class AplikasiKuis:
 
     tk.Button(self.login_frame, text="Login", command= self.login). pack(pady=5)
     tk.button(self.login_frame, text="Daftar", command= self.tampilkan_daftar_frame). pack()
-
+hanif
   
