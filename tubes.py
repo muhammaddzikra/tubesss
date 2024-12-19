@@ -153,3 +153,98 @@ class AplikasiKuis:
             btn = tk.Button(self.opsi_frame, width=30)
             btn.pack(pady=2)
             self.opsi_buttons.append(btn)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    def tampilkan_edit_soal_frame(self):
+        self.tampilkan_frame(self.edit_soal_frame)
+        self.soal_listbox.delete(0, tk.END)
+
+        for i, soal in enumerate(soal_data.get("default", [])):
+            self.soal_listbox.insert(tk.END, f"{i+1}. {soal['soal'][:50]}...")
+
+    def hapus_soal(self):
+        selection = self.soal_listbox.curselection()
+        if not selection:
+            messagebox.showerror("Error", "Pilih soal yang akan dihapus!")
+            return
+
+        if messagebox.askyesno("Konfirmasi", "Yakin ingin menghapus soal ini?"):
+            idx = selection[0]
+            soal_data["default"].pop(idx)
+            simpan_data(DATA_FILE, soal_data)
+            self.tampilkan_edit_soal_frame()
