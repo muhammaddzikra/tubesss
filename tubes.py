@@ -248,3 +248,49 @@ class AplikasiKuis:
             soal_data["default"].pop(idx)
             simpan_data(DATA_FILE, soal_data)
             self.tampilkan_edit_soal_frame()
+
+    def mulai_kuis(self):
+        if not soal_data.get("default"):
+            messagebox.showerror("Error", "Tidak ada soal yang tersedia!")
+            return
+
+        self.indeks_soal = 0
+        self.skor = 0
+        self.tampilkan_frame(self.kuis_frame)
+        self.tampilkan_soal()
+
+    def tampilkan_soal(self):
+        if self.indeks_soal < len(soal_data["default"]):
+            soal = soal_data["default"][self.indeks_soal]
+            self.soal_label.config(text=f"Soal {self.indeks_soal + 1}:\n{soal['soal']}")
+
+            for i, (btn, opsi) in enumerate(zip(self.opsi_buttons, soal['opsi'])):
+                btn.config(
+                    text=f"{chr(65+i)}. {opsi}",
+                    command=lambda x=chr(65+i): self.jawab(x)
+                )
+        else:
+            self.selesaikan_kuis()
+
+    def jawab(self, pilihan):
+        soal = soal_data["default"][self.indeks_soal]
+        if pilihan == soal['jawaban']:
+            self.skor += 1
+        self.indeks_soal += 1
+        self.tampilkan_soal()
+
+    def selesaikan_kuis(self):
+        total_soal = len(soal_data["default"])
+        persentase = (self.skor / total_soal) * 100
+        messagebox.showinfo("Kuis Selesai", 
+                          f"Skor Anda: {self.skor}/{total_soal} ({persentase:.1f}%)")
+        self.tampilkan_frame(self.menu_utama_frame)
+
+    def logout(self):
+        self.pengguna_saat_ini = None
+        self.tampilkan_frame(self.login_frame)
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = AplikasiKuis(root)
+    root.mainloop()
