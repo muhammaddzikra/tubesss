@@ -31,7 +31,7 @@ soal_data = muat_data(DATA_FILE)
 pengguna_data = muat_data(USER_FILE)
 
 class AplikasiKuis:
-  def__init__(self, root):
+  def __init__(self, root):
     self.root = root
     self.root.title("Aplikasi Kuis")
     self.root.geometry("500x500")
@@ -59,7 +59,7 @@ class AplikasiKuis:
     #Tampilkan Frame login pertama kali 
     self.login_frame.pack()
 
-  def setup_login_frame(self)
+  def setup_login_frame(self):
     tk.Label(self.login_frame, text="Login", font=('Arial', 14, 'bold')).pack(pady=10)
 
     tk.Label(self.login_frame, text="Nama Pengguna").pack()
@@ -71,7 +71,7 @@ class AplikasiKuis:
     self.password_entry.pack()
 
     tk.Button(self.login_frame, text="Login", command= self.login). pack(pady=5)
-    tk.button(self.login_frame, text="Daftar", command= self.tampilkan_daftar_frame). pack()
+    tk.Button(self.login_frame, text="Daftar", command=self.tampilkan_daftar_frame).pack()
 
     def __init__(self, root):
         self.root = root
@@ -196,7 +196,7 @@ class AplikasiKuis:
             btn.pack(pady=2)
             self.opsi_buttons.append(btn)
 
- def tampilkan_frame(self, frame):
+    def tampilkan_frame(self, frame):
         for f in [self.login_frame, self.daftar_frame, self.menu_utama_frame, 
                   self.kelola_soal_frame, self.edit_soal_frame, self.kuis_frame]:
             f.pack_forget()
